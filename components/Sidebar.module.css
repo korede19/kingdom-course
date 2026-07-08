@@ -1,0 +1,147 @@
+.sidebar {
+  width: 252px;
+  flex-shrink: 0;
+  background: var(--color-green-deep);
+  display: flex;
+  flex-direction: column;
+  padding: 26px 18px;
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  border-right: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  padding: 0 6px 26px;
+  border-bottom: 1px solid rgba(210, 130, 60, 0.18);
+  margin-bottom: 22px;
+  text-decoration: none;
+}
+
+.brandBadge {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 2px solid var(--color-orange);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.brandName {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 16.5px;
+  color: #f7efdc;
+  line-height: 1.25;
+}
+
+.nav {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.navItem,
+.navItemActive {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 11px 12px;
+  border-radius: 10px;
+  font-size: 14.5px;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.navItem {
+  color: #b9cfc7;
+}
+
+.navItem:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.navItemActive {
+  background: rgba(210, 130, 60, 0.16);
+  color: #f7efdc;
+}
+
+.navIcon {
+  width: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.cartBadge {
+  margin-left: auto;
+  background: var(--color-orange);
+  color: var(--color-green);
+  font-size: 10.5px;
+  font-weight: 800;
+  padding: 2px 7px;
+  border-radius: 999px;
+}
+
+.spacer {
+  flex: 1;
+}
+
+.profile {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(210, 130, 60, 0.18);
+  border-radius: 14px;
+  padding: 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--color-gold), var(--color-gold-deep));
+  color: var(--color-green);
+  font-weight: 800;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.profileInfo {
+  min-width: 0;
+  flex: 1;
+}
+
+.profileName {
+  color: #f7efdc;
+  font-size: 13.5px;
+  font-weight: 700;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.logout {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  color: #8fafa6;
+  font-size: 12px;
+  font-weight: 600;
+  background: none;
+  border: none;
+  padding: 0;
+  margin-top: 2px;
+}

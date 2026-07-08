@@ -1,0 +1,128 @@
+.backLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--color-text-muted);
+  font-size: 14px;
+  margin-bottom: 18px;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.badgeRow {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+  flex-wrap: wrap;
+}
+
+.lessonBadge {
+  background: var(--color-green);
+  color: var(--color-gold);
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 5px 12px;
+  border-radius: 999px;
+}
+
+.earnBadge {
+  background: #efe4c6;
+  color: var(--color-text-muted);
+  font-size: 12px;
+  font-weight: 700;
+  padding: 5px 12px;
+  border-radius: 999px;
+}
+
+.title {
+  font-size: 28px;
+  margin: 0 0 26px;
+  color: var(--color-green);
+  line-height: 1.3;
+}
+
+.panel {
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: 20px;
+  padding: 30px;
+  box-shadow: var(--shadow-card);
+  margin-bottom: 20px;
+}
+
+.wordBefore {
+  background: linear-gradient(135deg, #fbf4de, #f5eacb);
+  border: 1.5px solid var(--color-border);
+  border-radius: 16px;
+  padding: 26px;
+  margin-bottom: 30px;
+}
+
+.wordBeforeHeading {
+  font-family: var(--font-serif);
+  font-weight: 600;
+  font-size: 14.5px;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--color-gold-deep);
+  margin-bottom: 14px;
+}
+
+.objectivesSection {
+  margin-bottom: 30px;
+}
+
+.objectivesHeading {
+  font-family: var(--font-serif);
+  font-weight: 600;
+  font-size: 16px;
+  color: var(--color-green);
+  margin-bottom: 12px;
+}
+
+.objectiveRow {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 9px;
+  align-items: flex-start;
+}
+
+.objectiveIcon {
+  flex-shrink: 0;
+  display: flex;
+  margin-top: 1px;
+}
+
+.objectiveText {
+  font-size: 15px;
+  color: #3a3428;
+  line-height: 1.5;
+}
+
+.part {
+  margin-bottom: 34px;
+}
+
+.partHeading {
+  font-size: 21px;
+  color: var(--color-green);
+  margin: 0 0 14px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid var(--color-border);
+}
+
+.continueButton {
+  width: 100%;
+  padding: 17px;
+  border: none;
+  border-radius: var(--radius-md);
+  background: linear-gradient(135deg, var(--color-green-mid), var(--color-green-darkest));
+  color: var(--color-gold);
+  font-weight: 700;
+  font-size: 16px;
+  margin-top: 10px;
+  box-shadow: 0 10px 22px rgba(20, 33, 61, 0.25);
+}

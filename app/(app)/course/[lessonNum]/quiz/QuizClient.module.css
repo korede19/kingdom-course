@@ -1,0 +1,379 @@
+.wrap {
+  max-width: 640px;
+  margin: 0 auto;
+}
+
+.cooldownPanel {
+  text-align: center;
+  padding: 60px 20px;
+  background: var(--color-bg-card);
+  border-radius: 18px;
+  border: 1.5px solid var(--color-border);
+}
+
+.cooldownIcon {
+  margin-bottom: 14px;
+  display: flex;
+  justify-content: center;
+}
+
+.cooldownTitle {
+  font-size: 23px;
+  color: var(--color-green);
+  margin: 0 0 10px;
+}
+
+.cooldownText {
+  color: var(--color-text-muted);
+  font-size: 15px;
+  max-width: 380px;
+  margin: 0 auto 20px;
+  line-height: 1.6;
+}
+
+.cooldownTimer {
+  font-family: var(--font-serif);
+  font-size: 38px;
+  font-weight: 700;
+  color: var(--color-orange);
+  margin-bottom: 26px;
+}
+
+.reviewLessonButton {
+  display: inline-block;
+  padding: 14px 26px;
+  border: none;
+  border-radius: 10px;
+  background: var(--color-green);
+  color: var(--color-gold);
+  font-weight: 700;
+  font-size: 15px;
+  text-decoration: none;
+}
+
+.quizHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 6px;
+}
+
+.quizMeta {
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--color-text-muted);
+}
+
+.dots {
+  display: flex;
+  gap: 5px;
+  margin-bottom: 26px;
+  flex-wrap: wrap;
+}
+
+.dot {
+  width: 100%;
+  max-width: 26px;
+  height: 6px;
+  border-radius: 999px;
+  flex: 1;
+}
+
+.dot_current {
+  background: var(--color-orange);
+}
+
+.dot_answered {
+  background: var(--color-green);
+}
+
+.dot_upcoming {
+  background: var(--color-input-border);
+}
+
+.question {
+  font-size: 22px;
+  color: var(--color-green);
+  line-height: 1.4;
+  margin: 0 0 24px;
+}
+
+.choices {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 28px;
+}
+
+.option,
+.optionSelected {
+  padding: 16px 18px;
+  border-radius: 12px;
+  border: 2px solid;
+  font-size: 15.5px;
+  color: #2b2a22;
+  line-height: 1.5;
+}
+
+.option {
+  border-color: var(--color-border);
+  background: var(--color-bg-card-alt);
+}
+
+.optionSelected {
+  border-color: var(--color-orange);
+  background: #fbf0e2;
+}
+
+.error {
+  color: var(--color-error);
+  font-size: 13.5px;
+  margin: 0 0 16px;
+  font-weight: 600;
+}
+
+.navRow {
+  display: flex;
+  gap: 12px;
+}
+
+.backButton {
+  padding: 15px 22px;
+  border: 1.5px solid var(--color-border-strong);
+  border-radius: 12px;
+  background: transparent;
+  color: var(--color-text-muted);
+  font-weight: 700;
+  font-size: 15px;
+}
+
+.nextButton,
+.submitButton {
+  flex: 1;
+  padding: 15px;
+  border: none;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 15px;
+}
+
+.nextButton {
+  background: var(--color-green);
+  color: var(--color-gold);
+}
+
+.submitButton {
+  background: var(--color-orange);
+  color: var(--color-green);
+  font-weight: 800;
+}
+
+.nextButton:disabled,
+.submitButton:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.resultPanelPass,
+.resultPanelFail {
+  text-align: center;
+  padding: 38px 24px;
+  border-radius: 20px;
+  margin-bottom: 30px;
+}
+
+.resultPanelPass {
+  background: #f7efdc;
+}
+
+.resultPanelFail {
+  background: #f7e9e6;
+}
+
+.resultIcon {
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: center;
+}
+
+.resultScore {
+  font-family: var(--font-serif);
+  font-size: 40px;
+  font-weight: 700;
+  color: var(--color-green);
+  margin-bottom: 6px;
+}
+
+.resultHeadlinePass,
+.resultHeadlineFail {
+  font-size: 17px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.resultHeadlinePass {
+  color: var(--color-gold-deep);
+}
+
+.resultHeadlineFail {
+  color: var(--color-error);
+}
+
+.resultSubtext {
+  font-size: 14.5px;
+  color: var(--color-text-muted);
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.badgeEarned {
+  margin-top: 22px;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  background: #ffffff;
+  border: 1.5px solid var(--color-border);
+  padding: 14px 20px;
+  border-radius: 14px;
+  text-align: left;
+}
+
+.badgeEarnedIcon {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  background: var(--color-green);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.badgeEarnedLabel {
+  font-family: var(--font-serif);
+  font-weight: 700;
+  font-size: 15px;
+  color: var(--color-green);
+}
+
+.actionsRow {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 34px;
+}
+
+.actionsRowInner {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.cooldownNotice {
+  text-align: center;
+  padding: 20px;
+  background: var(--color-bg-card);
+  border: 1.5px solid var(--color-border);
+  border-radius: 14px;
+  margin-bottom: 16px;
+  font-size: 14.5px;
+  color: var(--color-text-muted);
+}
+
+.secondaryAction,
+.primaryAction,
+.primaryActionGold {
+  flex: 1;
+  min-width: 160px;
+  padding: 15px;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 15px;
+  text-align: center;
+  text-decoration: none;
+  border: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.secondaryAction {
+  border: 1.5px solid var(--color-border-strong);
+  background: transparent;
+  color: var(--color-text-muted);
+}
+
+.primaryAction {
+  background: var(--color-green);
+  color: var(--color-gold);
+}
+
+.primaryAction:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.primaryActionGold {
+  background: var(--color-orange);
+  color: var(--color-green);
+  font-weight: 800;
+}
+
+.reviewHeading {
+  font-family: var(--font-serif);
+  font-size: 17px;
+  color: var(--color-green);
+  margin-bottom: 16px;
+}
+
+.reviewCardCorrect,
+.reviewCardIncorrect {
+  background: var(--color-bg-card);
+  border: 1.5px solid var(--color-border);
+  border-radius: 10px;
+  padding: 16px 18px;
+  margin-bottom: 12px;
+  border-left-width: 4px;
+}
+
+.reviewCardCorrect {
+  border-left-color: var(--color-success);
+}
+
+.reviewCardIncorrect {
+  border-left-color: var(--color-error);
+}
+
+.reviewQuestion {
+  font-size: 14.5px;
+  font-weight: 700;
+  color: var(--color-green);
+  margin-bottom: 8px;
+  line-height: 1.5;
+}
+
+.reviewYourAnswerCorrect,
+.reviewYourAnswerIncorrect {
+  font-size: 13.5px;
+  margin-bottom: 3px;
+}
+
+.reviewYourAnswerCorrect {
+  color: var(--color-success);
+}
+
+.reviewYourAnswerIncorrect {
+  color: var(--color-error);
+}
+
+.reviewCorrectAnswer {
+  font-size: 13.5px;
+  color: var(--color-success);
+  margin-bottom: 8px;
+}
+
+.reviewExplanation {
+  font-size: 13px;
+  color: #7a7057;
+  line-height: 1.55;
+}

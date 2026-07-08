@@ -1,0 +1,280 @@
+.greeting {
+  font-size: 30px;
+  margin: 0 0 6px;
+  color: var(--color-green);
+}
+
+.subtitle {
+  margin: 0 0 26px;
+  color: var(--color-text-muted);
+  font-size: 16px;
+}
+
+.courseCard {
+  cursor: pointer;
+  display: flex;
+  flex-wrap: nowrap;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: var(--color-bg-card-solid);
+  box-shadow: 0 4px 20px rgba(18, 59, 54, 0.14);
+  margin-bottom: 32px;
+  text-decoration: none;
+  color: inherit;
+}
+
+.courseCardMain {
+  flex: 1 1 auto;
+  min-width: 0;
+  padding: 34px 36px;
+}
+
+.eyebrow {
+  display: inline-block;
+  background: #eaf2ef;
+  color: var(--color-green);
+  font-size: 11.5px;
+  font-weight: 800;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  padding: 5px 12px;
+  border-radius: 999px;
+  margin-bottom: 16px;
+}
+
+.courseTitle {
+  font-size: 25px;
+  margin: 0 0 8px;
+  color: var(--color-green);
+  line-height: 1.3;
+}
+
+.courseDescription {
+  margin: 0 0 20px;
+  color: #7a7057;
+  font-size: 14.5px;
+  line-height: 1.6;
+  max-width: 420px;
+}
+
+.progressWrap {
+  max-width: 320px;
+  margin-bottom: 16px;
+}
+
+.ctaRow {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.ctaButton {
+  padding: 12px 22px;
+  border: none;
+  border-radius: 10px;
+  background: var(--color-green);
+  color: var(--color-gold);
+  font-weight: 800;
+  font-size: 14.5px;
+}
+
+.progressLabel {
+  color: var(--color-gold-deep);
+  font-size: 13.5px;
+  font-weight: 700;
+}
+
+.statsPanel {
+  flex: 0 0 190px;
+  min-width: 0;
+  width: 190px;
+  background: var(--color-green);
+  padding: 24px 18px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+}
+
+.statRow {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 9px 0;
+}
+
+.statIcon {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(210, 130, 60, 0.16);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.statValue {
+  font-family: var(--font-serif);
+  font-size: 19px;
+  font-weight: 700;
+  color: #f7efdc;
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.statMax {
+  font-size: 12px;
+  color: #8fafa6;
+  font-weight: 600;
+}
+
+.statLabel {
+  color: #8fafa6;
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+  white-space: nowrap;
+}
+
+.statDivider {
+  border-top: 1px dotted rgba(242, 201, 155, 0.25);
+}
+
+.sectionHeading {
+  font-size: 19px;
+  color: var(--color-green);
+  margin: 0 0 16px;
+}
+
+.comingSoonGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  gap: 18px;
+}
+
+.comingSoonCard {
+  border-radius: 16px;
+  padding: 22px;
+  opacity: 0.85;
+  position: relative;
+  border: 1px solid;
+}
+
+.comingSoonAmber {
+  background: #efe7e1;
+  border-color: #e3d5cb;
+}
+
+.comingSoonAmber .comingSoonIcon {
+  background: #e1cdbc;
+  color: #8a6047;
+}
+
+.comingSoonAmber .comingSoonTitle {
+  color: #3d2a20;
+}
+
+.comingSoonAmber .comingSoonDescription {
+  color: #7a5c48;
+}
+
+.comingSoonAmber .comingSoonBadge {
+  background: #d9c3b0;
+  color: #5c4030;
+}
+
+.comingSoonGreen {
+  background: #e4ede7;
+  border-color: #cfe0d5;
+}
+
+.comingSoonGreen .comingSoonIcon {
+  background: #cbe1d3;
+  color: #2e6b4c;
+}
+
+.comingSoonGreen .comingSoonTitle {
+  color: #20372b;
+}
+
+.comingSoonGreen .comingSoonDescription {
+  color: #4f6b5a;
+}
+
+.comingSoonGreen .comingSoonBadge {
+  background: #bedacb;
+  color: #2e4a3b;
+}
+
+.comingSoonPurple {
+  background: #ede6ef;
+  border-color: #dccce0;
+}
+
+.comingSoonPurple .comingSoonIcon {
+  background: #dfc9e4;
+  color: #6b3f73;
+}
+
+.comingSoonPurple .comingSoonTitle {
+  color: #3a2440;
+}
+
+.comingSoonPurple .comingSoonDescription {
+  color: #654f6b;
+}
+
+.comingSoonPurple .comingSoonBadge {
+  background: #d6c0db;
+  color: #4a2e52;
+}
+
+.comingSoonBadge {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  font-size: 10.5px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  padding: 4px 9px;
+  border-radius: 999px;
+}
+
+.comingSoonIcon {
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 14px;
+}
+
+.comingSoonTitle {
+  font-family: var(--font-serif);
+  font-weight: 600;
+  font-size: 16.5px;
+  margin-bottom: 6px;
+}
+
+.comingSoonDescription {
+  font-size: 13.5px;
+  line-height: 1.5;
+}
+
+@media (max-width: 640px) {
+  .courseCard {
+    flex-wrap: wrap;
+  }
+
+  .statsPanel {
+    width: 100%;
+    flex-direction: row;
+    gap: 18px;
+    flex-wrap: wrap;
+  }
+}

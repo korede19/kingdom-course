@@ -1,0 +1,31 @@
+.paragraph {
+  font-size: 15.5px;
+  line-height: 1.75;
+  color: #2b2a22;
+  margin: 0 0 16px;
+}
+
+.quoteBlock {
+  background: #fbf4e0;
+  border-left: 4px solid var(--color-orange);
+  border-radius: 0 10px 10px 0;
+  padding: 16px 20px;
+  margin: 0 0 4px;
+}
+
+.quoteText {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 17px;
+  line-height: 1.65;
+  color: var(--color-green);
+  margin: 0;
+}
+
+.cite {
+  font-size: 13px;
+  color: var(--color-gold-deep);
+  font-weight: 700;
+  margin: 0 0 18px;
+  padding-left: 20px;
+}

@@ -1,26 +1,75 @@
-@import "tailwindcss";
-
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --color-bg: #faf7ef;
+  --color-bg-card: #fffcf3;
+  --color-bg-card-alt: #fffdf8;
+  --color-bg-card-solid: #fffef9;
+
+  --color-text: #20242f;
+  --color-text-muted: #7c7157;
+  --color-text-faint: #9c9280;
+
+  --color-green-darkest: #0b2622;
+  --color-green-deep: #0e2e2b;
+  --color-green-mid: #16463f;
+  --color-green: #123b36;
+
+  --color-gold: #f2c99b;
+  --color-gold-deep: #a85f1e;
+  --color-orange: #d2823c;
+
+  --color-border: #ede3c4;
+  --color-border-strong: #dcc98d;
+  --color-input-border: #e6dab8;
+
+  --color-error: #c43e2e;
+  --color-success: #0b7a5a;
+
+  --font-sans: var(--font-figtree), sans-serif;
+  --font-serif: var(--font-spectral), serif;
+  --font-display: var(--font-unbounded), sans-serif;
+
+  --shadow-card: 0 10px 26px rgba(20, 15, 5, 0.06);
+  --shadow-panel: 0 24px 60px rgba(20, 15, 5, 0.14), 0 2px 8px rgba(20, 15, 5, 0.06);
+  --radius-md: 12px;
+  --radius-lg: 18px;
+  --radius-xl: 24px;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+* {
+  box-sizing: border-box;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html,
+body {
+  padding: 0;
+  margin: 0;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  min-height: 100vh;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--font-display);
+  margin: 0;
+}
+
+button,
+input,
+textarea {
+  font-family: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+a {
+  color: inherit;
 }

@@ -1,0 +1,146 @@
+.title {
+  font-size: 28px;
+  margin: 0 0 6px;
+  color: var(--color-green);
+}
+
+.subtitle {
+  margin: 0 0 24px;
+  color: var(--color-text-muted);
+  font-size: 15.5px;
+}
+
+.progressWrap {
+  margin-bottom: 32px;
+}
+
+.panel {
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: 20px;
+  padding: 30px 30px 8px;
+  box-shadow: var(--shadow-card);
+}
+
+.row {
+  display: flex;
+  gap: 18px;
+  position: relative;
+}
+
+.railCol {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.circle {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-serif);
+  font-weight: 700;
+  font-size: 18px;
+  flex-shrink: 0;
+  box-shadow: 0 4px 10px rgba(20, 33, 61, 0.15);
+  border: 2px solid rgba(255, 255, 255, 0.6);
+  text-decoration: none;
+}
+
+.circleComplete {
+  background: var(--color-green);
+  color: var(--color-gold);
+}
+
+.circleAvailable {
+  background: var(--color-orange);
+  color: #fffdf8;
+}
+
+.circleLocked {
+  background: #e6dab8;
+  color: #a99a6f;
+}
+
+.rail {
+  width: 2px;
+  flex: 1;
+  min-height: 36px;
+}
+
+.railDone {
+  background: var(--color-orange);
+}
+
+.railLocked {
+  background: var(--color-input-border);
+}
+
+.nodeBody {
+  padding-bottom: 34px;
+  flex: 1;
+  min-width: 0;
+}
+
+.nodeBodyLast {
+  padding-bottom: 10px;
+  flex: 1;
+  min-width: 0;
+}
+
+.eyebrow {
+  font-size: 11.5px;
+  font-weight: 800;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--color-gold-deep);
+  margin-bottom: 4px;
+}
+
+.lessonTitle {
+  font-family: var(--font-serif);
+  font-weight: 600;
+  font-size: 18px;
+  color: var(--color-green);
+  margin-bottom: 5px;
+}
+
+.teaser,
+.certDescription {
+  font-size: 14px;
+  color: #7a7057;
+  line-height: 1.5;
+  margin-bottom: 12px;
+  max-width: 520px;
+}
+
+.cta {
+  display: inline-block;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 14px;
+  text-decoration: none;
+}
+
+.ctaAvailable {
+  background: var(--color-green);
+  color: var(--color-gold);
+}
+
+.ctaComplete {
+  background: transparent;
+  border: 1.5px solid var(--color-border-strong);
+  color: var(--color-text-muted);
+}
+
+.ctaLocked {
+  background: #efe8d4;
+  color: #a99a6f;
+  cursor: not-allowed;
+}

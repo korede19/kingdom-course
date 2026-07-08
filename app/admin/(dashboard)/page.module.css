@@ -1,0 +1,257 @@
+.title {
+  font-size: 28px;
+  margin: 0 0 6px;
+  color: var(--color-green);
+}
+
+.subtitle {
+  margin: 0 0 28px;
+  color: var(--color-text-muted);
+  font-size: 15.5px;
+}
+
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+  margin-bottom: 38px;
+}
+
+.statCard {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  background: var(--color-bg-card-alt);
+  border: 1px solid #e5e0d2;
+  border-radius: 18px;
+  padding: 24px;
+  box-shadow: 0 1px 3px rgba(20, 20, 10, 0.04);
+}
+
+.statIcon {
+  width: 48px;
+  height: 48px;
+  border-radius: 13px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.statIconGold {
+  background: #f5eacb;
+}
+
+.statIconGreen {
+  background: #e4ede7;
+}
+
+.statBody {
+  min-width: 0;
+}
+
+.statValue {
+  font-family: var(--font-sans);
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--color-green);
+  line-height: 1.15;
+  margin-bottom: 6px;
+  letter-spacing: -0.01em;
+}
+
+.statLabel {
+  font-size: 13.5px;
+  color: var(--color-text-muted);
+  font-weight: 700;
+}
+
+.statMeta {
+  font-size: 12px;
+  color: var(--color-text-faint);
+  font-weight: 600;
+  margin-top: 2px;
+}
+
+.tableHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+
+.searchForm {
+  display: flex;
+  gap: 8px;
+}
+
+.searchInput {
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: 1.5px solid var(--color-input-border);
+  font-size: 14px;
+  background: #fffcf3;
+  min-width: 240px;
+}
+
+.searchButton {
+  padding: 10px 16px;
+  border: none;
+  border-radius: 10px;
+  background: var(--color-green);
+  color: var(--color-gold);
+  font-weight: 700;
+  font-size: 13.5px;
+}
+
+.sortLinks {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 13.5px;
+}
+
+.sortLabel {
+  color: var(--color-text-faint);
+  font-weight: 600;
+}
+
+.sortLink,
+.sortActive {
+  text-decoration: none;
+  font-weight: 600;
+  padding: 4px 2px;
+}
+
+.sortLink {
+  color: var(--color-text-muted);
+}
+
+.sortActive {
+  color: var(--color-gold-deep);
+  border-bottom: 2px solid var(--color-orange);
+}
+
+.tableWrap {
+  background: var(--color-bg-card-alt);
+  border: 1px solid #e5e0d2;
+  border-radius: 16px;
+  overflow-x: auto;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13.5px;
+}
+
+.table th {
+  text-align: left;
+  padding: 14px 18px;
+  font-size: 11.5px;
+  font-weight: 800;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--color-text-faint);
+  border-bottom: 1px solid #e5e0d2;
+  white-space: nowrap;
+}
+
+.table td {
+  padding: 14px 18px;
+  border-bottom: 1px solid #f0ece0;
+  vertical-align: middle;
+}
+
+.table tr:last-child td {
+  border-bottom: none;
+}
+
+.userLink {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+}
+
+.userName {
+  font-weight: 700;
+  color: var(--color-green);
+}
+
+.userEmail {
+  color: var(--color-text-muted);
+  font-size: 12.5px;
+}
+
+.progressCell {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  min-width: 140px;
+}
+
+.progressCell > :global(div) {
+  flex: 1;
+}
+
+.progressLabel {
+  font-size: 12.5px;
+  font-weight: 700;
+  color: var(--color-text-muted);
+  white-space: nowrap;
+}
+
+.certYes {
+  color: var(--color-success);
+  font-weight: 600;
+}
+
+.certNo {
+  color: var(--color-text-faint);
+}
+
+.mutedCell {
+  color: var(--color-text-muted);
+}
+
+.emptyCell {
+  text-align: center;
+  padding: 30px;
+  color: var(--color-text-faint);
+}
+
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 22px;
+}
+
+.pageButton,
+.pageButtonDisabled {
+  padding: 9px 16px;
+  border-radius: 8px;
+  border: 1.5px solid var(--color-border-strong);
+  font-weight: 600;
+  font-size: 13.5px;
+  text-decoration: none;
+}
+
+.pageButton {
+  color: var(--color-text);
+}
+
+.pageButtonDisabled {
+  color: var(--color-text-faint);
+  pointer-events: none;
+  opacity: 0.5;
+}
+
+.pageStatus {
+  font-size: 13px;
+  color: var(--color-text-muted);
+  font-weight: 600;
+}

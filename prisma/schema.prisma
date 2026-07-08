@@ -1,0 +1,110 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id             String   @id @default(cuid())
+  name           String
+  email          String   @unique
+  passwordHash   String
+  completionDate DateTime?
+  createdAt      DateTime @default(now())
+
+  sessions  Session[]
+  progress  LessonProgress[]
+  cartItems CartItem[]
+  orders    Order[]
+  donations Donation[]
+}
+
+model Session {
+  id        String   @id @default(cuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  expiresAt DateTime
+
+  @@index([userId])
+}
+
+model LessonProgress {
+  id            String    @id @default(cuid())
+  userId        String
+  user          User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  lessonNum     Int
+  read          Boolean   @default(false)
+  quizPassed    Boolean   @default(false)
+  bestScore     Int       @default(0)
+  attempts      Int       @default(0)
+  cooldownUntil DateTime?
+  badgeEarned   Boolean   @default(false)
+  reflection    Json?
+  updatedAt     DateTime  @updatedAt
+
+  @@unique([userId, lessonNum])
+}
+
+model CartItem {
+  id        String @id @default(cuid())
+  userId    String
+  user      User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  productId String
+  quantity  Int    @default(1)
+
+  @@unique([userId, productId])
+}
+
+model Order {
+  id         String      @id @default(cuid())
+  userId     String
+  user       User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  totalCents Int
+  createdAt  DateTime    @default(now())
+  items      OrderItem[]
+}
+
+model OrderItem {
+  id            String @id @default(cuid())
+  orderId       String
+  order         Order  @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  productId     String
+  name          String
+  unitPriceCents Int
+  quantity      Int
+}
+
+model Donation {
+  id          String   @id @default(cuid())
+  userId      String?
+  user        User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
+  name        String
+  email       String
+  amountCents Int
+  frequency   String
+  createdAt   DateTime @default(now())
+}
+
+/// Fully separate from User — admins sign in with their own credentials,
+/// distinct from course-taking users, via /admin/login.
+model Admin {
+  id           String   @id @default(cuid())
+  name         String
+  email        String   @unique
+  passwordHash String
+  createdAt    DateTime @default(now())
+
+  sessions AdminSession[]
+}
+
+model AdminSession {
+  id        String   @id @default(cuid())
+  adminId   String
+  admin     Admin    @relation(fields: [adminId], references: [id], onDelete: Cascade)
+  expiresAt DateTime
+
+  @@index([adminId])
+}

@@ -1,0 +1,14 @@
+.page {
+  min-height: 100vh;
+  display: flex;
+  flex-wrap: wrap;
+  background: radial-gradient(circle at 15% 10%, #fdfbf5, var(--color-bg) 55%);
+}
+
+.formSide {
+  flex: 1 1 420px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 24px;
+}

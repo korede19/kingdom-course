@@ -1,0 +1,92 @@
+.hero {
+  flex: 1 1 420px;
+  min-height: 320px;
+  position: relative;
+  overflow: hidden;
+  background: var(--color-green-deep);
+}
+
+.image {
+  object-fit: cover;
+}
+
+.scrim {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(190deg, rgba(10, 15, 30, 0.15) 0%, rgba(10, 15, 30, 0.55) 55%, rgba(8, 12, 24, 0.92) 100%);
+  pointer-events: none;
+}
+
+.content {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 52px 44px;
+  pointer-events: none;
+}
+
+.brandRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 26px;
+}
+
+.brandBadge {
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  border: 2px solid var(--color-gold);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(10, 15, 30, 0.4);
+  backdrop-filter: blur(2px);
+  flex-shrink: 0;
+}
+
+.brandName {
+  font-family: var(--font-serif);
+  font-size: 14px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--color-gold);
+  font-weight: 600;
+}
+
+.title {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: 38px;
+  line-height: 1.18;
+  color: #fcf9f0;
+  max-width: 460px;
+  text-shadow: 0 2px 18px rgba(0, 0, 0, 0.35);
+}
+
+.divider {
+  margin-top: 20px;
+  width: 52px;
+  height: 3px;
+  background: linear-gradient(90deg, var(--color-gold), var(--color-gold-deep));
+}
+
+.verse {
+  margin: 20px 0 0;
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-size: 17px;
+  line-height: 1.6;
+  color: #d9cfae;
+  max-width: 400px;
+}
+
+.verseRef {
+  margin-top: 8px;
+  font-size: 13px;
+  color: #a9986b;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+}
