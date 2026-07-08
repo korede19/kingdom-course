@@ -135,3 +135,14 @@
   color: var(--color-text-muted);
   white-space: nowrap;
 }
+
+@media (max-width: 640px) {
+  .headerCard {
+    padding: 18px 20px;
+    gap: 14px;
+  }
+
+  .userName {
+    font-size: 19px;
+  }
+}

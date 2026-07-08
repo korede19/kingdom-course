@@ -126,3 +126,17 @@
   margin-top: 10px;
   box-shadow: 0 10px 22px rgba(20, 33, 61, 0.25);
 }
+
+@media (max-width: 640px) {
+  .title {
+    font-size: 23px;
+  }
+
+  .panel {
+    padding: 20px 18px;
+  }
+
+  .wordBefore {
+    padding: 18px;
+  }
+}

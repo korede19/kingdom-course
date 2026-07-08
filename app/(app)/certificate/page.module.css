@@ -163,3 +163,25 @@
     display: none;
   }
 }
+
+@media (max-width: 640px) {
+  .certificate {
+    padding: 34px 20px;
+  }
+
+  .certificateInner {
+    inset: 10px;
+  }
+
+  .name {
+    font-size: 24px;
+  }
+
+  .body {
+    font-size: 14.5px;
+  }
+
+  .actions {
+    flex-direction: column;
+  }
+}

@@ -14,3 +14,15 @@
   margin: 0 auto;
   padding: 36px 32px 80px;
 }
+
+@media (max-width: 880px) {
+  .shell {
+    flex-direction: column;
+  }
+}
+
+@media (max-width: 640px) {
+  .inner {
+    padding: 24px 18px 60px;
+  }
+}

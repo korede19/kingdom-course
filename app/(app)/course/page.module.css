@@ -144,3 +144,27 @@
   color: #a99a6f;
   cursor: not-allowed;
 }
+
+@media (max-width: 640px) {
+  .title {
+    font-size: 23px;
+  }
+
+  .panel {
+    padding: 22px 16px 8px;
+  }
+
+  .row {
+    gap: 12px;
+  }
+
+  .circle {
+    width: 44px;
+    height: 44px;
+    font-size: 15px;
+  }
+
+  .lessonTitle {
+    font-size: 16px;
+  }
+}

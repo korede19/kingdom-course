@@ -1,12 +1,13 @@
 "use client";
 
-import { useActionState } from "react";
+import { useActionState, useState } from "react";
 import { adminLoginAction, type AdminAuthState } from "@/actions/admin-auth";
 import { Icon } from "@/components/Icon";
 import styles from "./AdminLoginForm.module.css";
 
 export function AdminLoginForm() {
   const [state, formAction, isPending] = useActionState<AdminAuthState, FormData>(adminLoginAction, null);
+  const [showPassword, setShowPassword] = useState(false);
 
   return (
     <div className={styles.card}>
@@ -37,11 +38,20 @@ export function AdminLoginForm() {
           <input
             id="admin-password"
             name="password"
-            type="password"
+            type={showPassword ? "text" : "password"}
             placeholder="••••••••"
-            className={styles.input}
+            className={`${styles.input} ${styles.inputWithToggle}`}
             required
           />
+          <button
+            type="button"
+            className={styles.toggleButton}
+            onClick={() => setShowPassword((v) => !v)}
+            aria-label={showPassword ? "Hide password" : "Show password"}
+            aria-pressed={showPassword}
+          >
+            <Icon name={showPassword ? "eyeOff" : "eye"} size={17} color="#8FA69E" />
+          </button>
         </div>
 
         {state?.error ? <div className={styles.error}>{state.error}</div> : null}

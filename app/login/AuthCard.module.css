@@ -87,6 +87,24 @@
   outline-offset: 1px;
 }
 
+.inputWithToggle {
+  padding-right: 42px;
+}
+
+.toggleButton {
+  position: absolute;
+  right: 13px;
+  top: 50%;
+  transform: translate(0, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  padding: 4px;
+  line-height: 0;
+}
+
 .error {
   color: var(--color-error);
   font-size: 13.5px;
@@ -112,12 +130,12 @@
   cursor: default;
 }
 
-.demoTip {
-  margin-top: 20px;
-  font-size: 12.5px;
-  color: var(--color-text-faint);
-  text-align: center;
-  background: #f7eedb;
-  border-radius: 9px;
-  padding: 10px;
+@media (max-width: 400px) {
+  .card {
+    padding: 30px 22px;
+  }
+
+  .heading {
+    font-size: 23px;
+  }
 }

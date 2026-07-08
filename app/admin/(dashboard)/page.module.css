@@ -255,3 +255,14 @@
   color: var(--color-text-muted);
   font-weight: 600;
 }
+
+@media (max-width: 640px) {
+  .searchForm {
+    width: 100%;
+  }
+
+  .searchInput {
+    min-width: 0;
+    flex: 1;
+  }
+}

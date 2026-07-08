@@ -14,6 +14,8 @@ export function AuthCard() {
     registerAction,
     null,
   );
+  const [showLoginPassword, setShowLoginPassword] = useState(false);
+  const [showRegisterPassword, setShowRegisterPassword] = useState(false);
 
   return (
     <div className={styles.card}>
@@ -59,11 +61,20 @@ export function AuthCard() {
             <input
               id="login-password"
               name="password"
-              type="password"
+              type={showLoginPassword ? "text" : "password"}
               placeholder="••••••••"
-              className={styles.input}
+              className={`${styles.input} ${styles.inputWithToggle}`}
               required
             />
+            <button
+              type="button"
+              className={styles.toggleButton}
+              onClick={() => setShowLoginPassword((v) => !v)}
+              aria-label={showLoginPassword ? "Hide password" : "Show password"}
+              aria-pressed={showLoginPassword}
+            >
+              <Icon name={showLoginPassword ? "eyeOff" : "eye"} size={17} color="#8FA69E" />
+            </button>
           </div>
 
           {loginState?.error ? <div className={styles.error}>{loginState.error}</div> : null}
@@ -71,10 +82,6 @@ export function AuthCard() {
           <button type="submit" className={styles.submit} disabled={loginPending}>
             {loginPending ? "Logging in…" : "Log In"}
           </button>
-
-          <div className={styles.demoTip}>
-            Demo tip: use <b>demo@kingdom.com</b> / <b>demo1234</b>
-          </div>
         </form>
       ) : (
         <form action={registerFormAction}>
@@ -118,12 +125,21 @@ export function AuthCard() {
             <input
               id="reg-password"
               name="password"
-              type="password"
+              type={showRegisterPassword ? "text" : "password"}
               placeholder="At least 6 characters"
-              className={styles.input}
+              className={`${styles.input} ${styles.inputWithToggle}`}
               required
               minLength={6}
             />
+            <button
+              type="button"
+              className={styles.toggleButton}
+              onClick={() => setShowRegisterPassword((v) => !v)}
+              aria-label={showRegisterPassword ? "Hide password" : "Show password"}
+              aria-pressed={showRegisterPassword}
+            >
+              <Icon name={showRegisterPassword ? "eyeOff" : "eye"} size={17} color="#8FA69E" />
+            </button>
           </div>
 
           {registerState?.error ? <div className={styles.error}>{registerState.error}</div> : null}

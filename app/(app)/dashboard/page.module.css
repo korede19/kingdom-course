@@ -267,8 +267,20 @@
 }
 
 @media (max-width: 640px) {
+  .greeting {
+    font-size: 24px;
+  }
+
   .courseCard {
     flex-wrap: wrap;
+  }
+
+  .courseCardMain {
+    padding: 26px 22px;
+  }
+
+  .courseTitle {
+    font-size: 21px;
   }
 
   .statsPanel {
@@ -276,5 +288,6 @@
     flex-direction: row;
     gap: 18px;
     flex-wrap: wrap;
+    padding: 20px 16px;
   }
 }
