@@ -7,6 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
+    "test": "vitest run",
+    "test:watch": "vitest",
     "db:seed": "tsx prisma/seed.ts"
   },
   "prisma": {
@@ -15,9 +17,10 @@
   "dependencies": {
     "@prisma/client": "^6",
     "bcryptjs": "^3",
-    "next": "16.2.10",
+    "next": "^16.2.11",
     "react": "19.2.4",
     "react-dom": "19.2.4",
+    "resend": "^6.18.0",
     "zod": "^4"
   },
   "devDependencies": {
@@ -28,7 +31,9 @@
     "eslint": "^9",
     "eslint-config-next": "16.2.10",
     "prisma": "^6",
+    "server-only": "^0.0.1",
     "tsx": "^4",
-    "typescript": "^5"
+    "typescript": "^5",
+    "vitest": "^4.1.10"
   }
 }

@@ -21,9 +21,32 @@ const unbounded = Unbounded({
   variable: "--font-unbounded",
 });
 
+const APP_URL = (process.env.NEXT_PUBLIC_APP_URL || "https://kingdomcultureacademy.com").replace(/\/$/, "");
+
 export const metadata: Metadata = {
+  metadataBase: new URL(APP_URL),
   title: "Kingdom Culture Academy",
-  description: "A Journey into the Culture of Heaven on Earth",
+  description:
+    "A 10-week journey into the Culture of Heaven on Earth — lessons, quizzes, badges, and a certificate of completion.",
+  openGraph: {
+    title: "Kingdom Culture Academy",
+    description: "A 10-week journey into the Culture of Heaven on Earth.",
+    url: APP_URL,
+    siteName: "Kingdom Culture Academy",
+    images: [{ url: "/images/hero.jpg", width: 1200, height: 800, alt: "Kingdom Culture Academy" }],
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Kingdom Culture Academy",
+    description: "A 10-week journey into the Culture of Heaven on Earth.",
+    images: ["/images/hero.jpg"],
+  },
+};
+
+export const viewport = {
+  themeColor: "#123b36",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

@@ -1,13 +1,14 @@
 "use client";
 
 import { useActionState, useState } from "react";
+import Link from "next/link";
 import { loginAction, registerAction, type AuthState } from "@/actions/auth";
 import { Icon } from "@/components/Icon";
 import styles from "./AuthCard.module.css";
 
 type Mode = "login" | "register";
 
-export function AuthCard() {
+export function AuthCard({ resetSuccess = false }: { resetSuccess?: boolean }) {
   const [mode, setMode] = useState<Mode>("login");
   const [loginState, loginFormAction, loginPending] = useActionState<AuthState, FormData>(loginAction, null);
   const [registerState, registerFormAction, registerPending] = useActionState<AuthState, FormData>(
@@ -76,6 +77,14 @@ export function AuthCard() {
               <Icon name={showLoginPassword ? "eyeOff" : "eye"} size={17} color="#8FA69E" />
             </button>
           </div>
+
+          <Link href="/forgot-password" className={styles.forgotLink}>
+            Forgot password?
+          </Link>
+
+          {resetSuccess && !loginState?.error ? (
+            <div className={styles.success}>Password updated. Log in with your new password.</div>
+          ) : null}
 
           {loginState?.error ? <div className={styles.error}>{loginState.error}</div> : null}
 
@@ -147,6 +156,11 @@ export function AuthCard() {
           <button type="submit" className={styles.submit} disabled={registerPending}>
             {registerPending ? "Creating account…" : "Create Account & Begin"}
           </button>
+
+          <p className={styles.legalNote}>
+            By creating an account, you agree to our <Link href="/terms">Terms</Link> and{" "}
+            <Link href="/privacy">Privacy Policy</Link>.
+          </p>
         </form>
       )}
     </div>

@@ -2,7 +2,8 @@
 
 import { useEffect, useMemo, useState, useTransition } from "react";
 import Link from "next/link";
-import { submitQuizAction, type QuizReviewItem } from "@/actions/progress";
+import { submitQuizAction } from "@/actions/progress";
+import type { QuizReviewItem } from "@/lib/quizScoring";
 import type { PublicQuizQuestion } from "@/lib/lessons-data";
 import { Icon } from "@/components/Icon";
 import styles from "./QuizClient.module.css";

@@ -9,15 +9,21 @@ export const metadata: Metadata = {
   title: "Log In · Kingdom Culture Academy",
 };
 
-export default async function LoginPage() {
+export default async function LoginPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ reset?: string }>;
+}) {
   const user = await getSessionUser();
   if (user) redirect("/dashboard");
+
+  const { reset } = await searchParams;
 
   return (
     <div className={styles.page}>
       <AuthHero />
       <div className={styles.formSide}>
-        <AuthCard />
+        <AuthCard resetSuccess={reset === "success"} />
       </div>
     </div>
   );

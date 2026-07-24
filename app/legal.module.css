@@ -1,0 +1,93 @@
+.page {
+  min-height: 100vh;
+  background: var(--color-bg);
+  padding: 48px 20px 80px;
+}
+
+.wrap {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+.backLink {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--color-text-muted);
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 28px;
+}
+
+.card {
+  background: var(--color-bg-card);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-xl);
+  padding: 44px 40px;
+  box-shadow: var(--shadow-card);
+}
+
+.brand {
+  font-family: var(--font-serif);
+  font-size: 13px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--color-gold-deep);
+  margin-bottom: 10px;
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: 28px;
+  color: var(--color-green);
+  margin: 0 0 8px;
+}
+
+.updated {
+  color: var(--color-text-faint);
+  font-size: 13px;
+  margin-bottom: 32px;
+}
+
+.section {
+  margin-bottom: 26px;
+}
+
+.sectionTitle {
+  font-family: var(--font-display);
+  font-size: 16.5px;
+  color: var(--color-green);
+  margin: 0 0 8px;
+}
+
+.section p,
+.section li {
+  color: #3a3428;
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+.section ul {
+  padding-left: 20px;
+  margin: 8px 0;
+}
+
+.section p + p {
+  margin-top: 10px;
+}
+
+.section a {
+  color: var(--color-gold-deep);
+  font-weight: 600;
+}
+
+@media (max-width: 640px) {
+  .card {
+    padding: 30px 22px;
+  }
+
+  .title {
+    font-size: 23px;
+  }
+}

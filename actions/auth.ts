@@ -6,6 +6,8 @@ import { prisma } from "@/lib/db";
 import { hashPassword, verifyPassword } from "@/lib/password";
 import { createSession, destroySession } from "@/lib/session";
 import { LESSON_NUMS } from "@/lib/constants";
+import { checkRateLimit, getClientIp } from "@/lib/rateLimit";
+import { sendWelcomeEmail } from "@/lib/email";
 
 export type AuthState = { error: string } | null;
 
@@ -13,6 +15,9 @@ const loginSchema = z.object({
   email: z.string().trim().toLowerCase().pipe(z.email("Enter a valid email address.")),
   password: z.string().min(1, "Enter your email and password."),
 });
+
+const LOGIN_LIMIT = 8;
+const LOGIN_WINDOW_MS = 10 * 60 * 1000;
 
 export async function loginAction(_prevState: AuthState, formData: FormData): Promise<AuthState> {
   const parsed = loginSchema.safeParse({
@@ -24,6 +29,13 @@ export async function loginAction(_prevState: AuthState, formData: FormData): Pr
   }
 
   const { email, password } = parsed.data;
+  const ip = await getClientIp();
+  const rate = checkRateLimit(`login:${ip}:${email}`, LOGIN_LIMIT, LOGIN_WINDOW_MS);
+  if (!rate.ok) {
+    const minutes = Math.ceil(rate.retryAfterSeconds / 60);
+    return { error: `Too many login attempts. Try again in ${minutes} minute${minutes === 1 ? "" : "s"}.` };
+  }
+
   const user = await prisma.user.findUnique({ where: { email } });
   if (!user || !(await verifyPassword(password, user.passwordHash))) {
     return { error: "No matching account. Check your details or register." };
@@ -39,6 +51,9 @@ const registerSchema = z.object({
   password: z.string().min(6, "Password should be at least 6 characters."),
 });
 
+const REGISTER_LIMIT = 5;
+const REGISTER_WINDOW_MS = 60 * 60 * 1000;
+
 export async function registerAction(_prevState: AuthState, formData: FormData): Promise<AuthState> {
   const parsed = registerSchema.safeParse({
     name: formData.get("name"),
@@ -49,6 +64,12 @@ export async function registerAction(_prevState: AuthState, formData: FormData):
     return { error: parsed.error.issues[0]?.message ?? "Please fill in every field." };
   }
   const { name, email, password } = parsed.data;
+
+  const ip = await getClientIp();
+  const rate = checkRateLimit(`register:${ip}`, REGISTER_LIMIT, REGISTER_WINDOW_MS);
+  if (!rate.ok) {
+    return { error: "Too many accounts created from this connection. Please try again later." };
+  }
 
   const existing = await prisma.user.findUnique({ where: { email } });
   if (existing) {
@@ -66,6 +87,7 @@ export async function registerAction(_prevState: AuthState, formData: FormData):
   });
 
   await createSession(user.id);
+  sendWelcomeEmail(user.email, user.name).catch((err: unknown) => console.error("[Auth] Welcome email failed:", err));
   redirect("/dashboard");
 }
 

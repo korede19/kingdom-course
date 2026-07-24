@@ -4,9 +4,11 @@ import { z } from "zod";
 import { revalidatePath } from "next/cache";
 import { prisma } from "@/lib/db";
 import { requireUser } from "@/lib/session";
-import { getLesson, correctIndex } from "@/lib/lessons-data";
+import { getLesson } from "@/lib/lessons-data";
 import { LESSON_COUNT } from "@/lib/constants";
-import { MAX_ATTEMPTS, COOLDOWN_MS, PASS_THRESHOLD, cooldownSecondsRemaining } from "@/lib/progress";
+import { MAX_ATTEMPTS, COOLDOWN_MS, cooldownSecondsRemaining } from "@/lib/progress";
+import { scoreQuiz, computeQuizOutcome, type QuizReviewItem } from "@/lib/quizScoring";
+import { sendCourseCompletionEmail } from "@/lib/email";
 
 function assertValidLessonNum(lessonNum: number): void {
   if (!Number.isInteger(lessonNum) || lessonNum < 1 || lessonNum > LESSON_COUNT) {
@@ -46,14 +48,6 @@ const submitQuizSchema = z.object({
   answers: z.array(z.number().int().min(0).max(3).nullable()).min(1),
 });
 
-export type QuizReviewItem = {
-  question: string;
-  yourAnswer: string;
-  correctAnswer: string;
-  wasCorrect: boolean;
-  explanation: string;
-};
-
 export type QuizSubmitResult =
   | { ok: false; error: string; cooldownSeconds: number }
   | {
@@ -92,26 +86,11 @@ export async function submitQuizAction(
     return { ok: false, error: "The quiz is on cooldown. Reread the lesson and try again shortly.", cooldownSeconds: activeCooldown };
   }
 
-  const submittedAnswers = parsed.data.answers;
-  let score = 0;
-  const review: QuizReviewItem[] = lesson.quiz.map((question, i) => {
-    const correctIdx = correctIndex(question);
-    const yourIdx = submittedAnswers[i] ?? null;
-    const wasCorrect = yourIdx === correctIdx;
-    if (wasCorrect) score++;
-    return {
-      question: question.q,
-      yourAnswer: yourIdx === null ? "No answer" : question.options[yourIdx],
-      correctAnswer: question.options[correctIdx],
-      wasCorrect,
-      explanation: question.explanation,
-    };
+  const { score, review } = scoreQuiz(lesson.quiz, parsed.data.answers);
+  const { pass, nextAttempts, shouldCooldown } = computeQuizOutcome({
+    score,
+    existingAttempts: existing?.attempts ?? 0,
   });
-
-  const pass = score >= PASS_THRESHOLD;
-  const prevAttempts = existing?.attempts ?? 0;
-  const nextAttempts = pass ? prevAttempts : prevAttempts + 1;
-  const shouldCooldown = !pass && nextAttempts >= MAX_ATTEMPTS;
 
   const updated = await prisma.lessonProgress.upsert({
     where: { userId_lessonNum: { userId: user.id, lessonNum: parsed.data.lessonNum } },
@@ -141,6 +120,9 @@ export async function submitQuizAction(
       const user2 = await prisma.user.findUnique({ where: { id: user.id } });
       if (!user2?.completionDate) {
         await prisma.user.update({ where: { id: user.id }, data: { completionDate: new Date() } });
+        sendCourseCompletionEmail(user.email, user.name).catch((err: unknown) =>
+          console.error("[Progress] Completion email failed:", err),
+        );
       }
     }
   }

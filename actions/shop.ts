@@ -6,6 +6,7 @@ import { redirect } from "next/navigation";
 import { prisma } from "@/lib/db";
 import { requireUser } from "@/lib/session";
 import { getProduct } from "@/lib/products";
+import { computeOrderItems } from "@/lib/orders";
 
 const productIdSchema = z.string().min(1);
 
@@ -43,20 +44,7 @@ export async function checkoutCartAction(): Promise<void> {
     redirect("/shop?error=empty-cart");
   }
 
-  const orderItems = cartItems
-    .map((item) => {
-      const product = getProduct(item.productId);
-      if (!product) return null;
-      return {
-        productId: product.id,
-        name: product.name,
-        unitPriceCents: product.priceCents,
-        quantity: item.quantity,
-      };
-    })
-    .filter((item): item is NonNullable<typeof item> => item !== null);
-
-  const totalCents = orderItems.reduce((sum, item) => sum + item.unitPriceCents * item.quantity, 0);
+  const { items: orderItems, totalCents } = computeOrderItems(cartItems, getProduct);
 
   await prisma.$transaction([
     prisma.order.create({

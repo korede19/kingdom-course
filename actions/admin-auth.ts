@@ -5,6 +5,7 @@ import { redirect } from "next/navigation";
 import { prisma } from "@/lib/db";
 import { verifyPassword } from "@/lib/password";
 import { createAdminSession, destroyAdminSession } from "@/lib/admin-session";
+import { checkRateLimit, getClientIp } from "@/lib/rateLimit";
 
 export type AdminAuthState = { error: string } | null;
 
@@ -12,6 +13,9 @@ const loginSchema = z.object({
   email: z.string().trim().toLowerCase().pipe(z.email("Enter a valid email address.")),
   password: z.string().min(1, "Enter your email and password."),
 });
+
+const ADMIN_LOGIN_LIMIT = 5;
+const ADMIN_LOGIN_WINDOW_MS = 15 * 60 * 1000;
 
 export async function adminLoginAction(
   _prevState: AdminAuthState,
@@ -26,6 +30,13 @@ export async function adminLoginAction(
   }
 
   const { email, password } = parsed.data;
+  const ip = await getClientIp();
+  const rate = checkRateLimit(`admin-login:${ip}`, ADMIN_LOGIN_LIMIT, ADMIN_LOGIN_WINDOW_MS);
+  if (!rate.ok) {
+    const minutes = Math.ceil(rate.retryAfterSeconds / 60);
+    return { error: `Too many attempts. Try again in ${minutes} minute${minutes === 1 ? "" : "s"}.` };
+  }
+
   const admin = await prisma.admin.findUnique({ where: { email } });
   if (!admin || !(await verifyPassword(password, admin.passwordHash))) {
     return { error: "Invalid admin credentials." };
