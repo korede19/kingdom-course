@@ -29,6 +29,23 @@ export default async function CoursePage() {
       </div>
 
       <div className={styles.panel}>
+        <div className={styles.row}>
+          <div className={styles.railCol}>
+            <Link href="/course/introduction" className={`${styles.circle} ${styles.circleAvailable}`}>
+              <Icon name="compass" size={22} />
+            </Link>
+            <div className={`${styles.rail} ${styles.railDone}`} />
+          </div>
+          <div className={styles.nodeBody}>
+            <div className={styles.eyebrow}>Start Here</div>
+            <div className={styles.lessonTitle}>Introduction</div>
+            <div className={styles.teaser}>Why this course exists, and what it means to seek the Kingdom first.</div>
+            <Link href="/course/introduction" className={`${styles.cta} ${styles.ctaAvailable}`}>
+              Read Introduction
+            </Link>
+          </div>
+        </div>
+
         {LESSONS.map((lesson) => {
           const status = lessonNodeStatus(progress, lesson.num);
           return (
@@ -69,12 +86,31 @@ export default async function CoursePage() {
             <Link href="/certificate" className={`${styles.circle} ${complete ? styles.circleComplete : styles.circleAvailable}`}>
               <Icon name="certificate" size={24} />
             </Link>
+            <div className={`${styles.rail} ${styles.railDone}`} />
           </div>
-          <div className={styles.nodeBodyLast}>
+          <div className={styles.nodeBody}>
             <div className={styles.lessonTitle}>Certificate of Completion</div>
             <div className={styles.certDescription}>Awarded once all ten lessons are complete.</div>
             <Link href="/certificate" className={`${styles.cta} ${complete ? styles.ctaComplete : styles.ctaAvailable}`}>
               {complete ? "View Certificate" : "View Progress"}
+            </Link>
+          </div>
+        </div>
+
+        <div className={styles.row}>
+          <div className={styles.railCol}>
+            <Link href="/course/bonus" className={`${styles.circle} ${styles.circleAvailable}`}>
+              <Icon name="star" size={22} />
+            </Link>
+          </div>
+          <div className={styles.nodeBodyLast}>
+            <div className={styles.eyebrow}>Bonus</div>
+            <div className={styles.lessonTitle}>Using the Name of Jesus</div>
+            <div className={styles.certDescription}>
+              Extra reading on your authority in the name of Jesus, adapted from E.W. Kenyon.
+            </div>
+            <Link href="/course/bonus" className={`${styles.cta} ${styles.ctaAvailable}`}>
+              Read Bonus Section
             </Link>
           </div>
         </div>
