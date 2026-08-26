@@ -35,9 +35,18 @@ export function DonationForm() {
   return (
     <div className={styles.wrap}>
       <h1 className={styles.title}>Give to the Kingdom</h1>
-      <p className={styles.subtitle}>
-        Your giving helps sustain this course and the wider work of building Kingdom culture in the earth.
-      </p>
+
+      <div className={styles.commonwealth}>
+        <div className={styles.commonwealthIcon}>
+          <Icon name="heart" size={20} color="#D2823C" />
+        </div>
+        <p className={styles.commonwealthText}>
+          One of the major principles of the Heavenly Kingdom Culture is Commonwealth. Therefore, in an effort to
+          encourage you to participate in God&rsquo;s commonwealth system, &ldquo;give and it shall be given,&rdquo;
+          we offer this course free of charge, but leave a place where you can leave a donation. This allows us to
+          continue giving the course freely, while helping you step into Kingdom culture.
+        </p>
+      </div>
 
       <form action={formAction} className={styles.panel}>
         <div className={styles.freqTabs}>

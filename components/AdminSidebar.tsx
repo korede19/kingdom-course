@@ -64,11 +64,29 @@ export function AdminSidebar({ adminName }: { adminName: string }) {
         </div>
 
         <nav className={styles.nav}>
-          <Link href="/admin" className={styles.navItemActive}>
+          <Link href="/admin" className={pathname === "/admin" ? styles.navItemActive : styles.navItem}>
             <span className={styles.navIcon}>
               <Icon name="grid" size={18} />
             </span>
             Overview
+          </Link>
+          <Link
+            href="/admin/orders"
+            className={pathname.startsWith("/admin/orders") ? styles.navItemActive : styles.navItem}
+          >
+            <span className={styles.navIcon}>
+              <Icon name="cart" size={18} />
+            </span>
+            Orders
+          </Link>
+          <Link
+            href="/admin/passport-applications"
+            className={pathname.startsWith("/admin/passport-applications") ? styles.navItemActive : styles.navItem}
+          >
+            <span className={styles.navIcon}>
+              <Icon name="passport" size={18} />
+            </span>
+            Passports
           </Link>
         </nav>
 

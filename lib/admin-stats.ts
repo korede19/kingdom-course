@@ -17,7 +17,7 @@ export async function getOverviewStats(): Promise<OverviewStats> {
     prisma.user.count(),
     prisma.user.count({ where: { completionDate: { not: null } } }),
     prisma.lessonProgress.count({ where: { quizPassed: true } }),
-    prisma.order.aggregate({ _count: true, _sum: { totalCents: true } }),
+    prisma.order.aggregate({ _count: true, _sum: { totalCents: true }, where: { paymentStatus: "paid" } }),
     prisma.donation.aggregate({ _count: true, _sum: { amountCents: true } }),
   ]);
 
@@ -115,4 +115,56 @@ export async function getUserDetail(userId: string) {
       donations: { orderBy: { createdAt: "desc" } },
     },
   });
+}
+
+export type OrderStatusFilter = "all" | "pending" | "paid";
+
+export async function getOrdersPage({
+  status,
+  page,
+  pageSize,
+}: {
+  status: OrderStatusFilter;
+  page: number;
+  pageSize: number;
+}) {
+  const where = status === "all" ? {} : { paymentStatus: status };
+
+  const [orders, total] = await Promise.all([
+    prisma.order.findMany({
+      where,
+      include: { items: true, user: { select: { name: true, email: true } } },
+      orderBy: { createdAt: "desc" },
+      skip: (page - 1) * pageSize,
+      take: pageSize,
+    }),
+    prisma.order.count({ where }),
+  ]);
+
+  return { orders, total };
+}
+
+export async function getPassportApplicationsPage({
+  status,
+  page,
+  pageSize,
+}: {
+  status: OrderStatusFilter;
+  page: number;
+  pageSize: number;
+}) {
+  const where = status === "all" ? {} : { paymentStatus: status };
+
+  const [applications, total] = await Promise.all([
+    prisma.passportApplication.findMany({
+      where,
+      include: { user: { select: { name: true, email: true } } },
+      orderBy: { createdAt: "desc" },
+      skip: (page - 1) * pageSize,
+      take: pageSize,
+    }),
+    prisma.passportApplication.count({ where }),
+  ]);
+
+  return { applications, total };
 }

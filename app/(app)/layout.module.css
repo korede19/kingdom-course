@@ -10,9 +10,10 @@
 }
 
 .inner {
-  max-width: 980px;
+  /* max-width: 980px; */
   margin: 0 auto;
-  padding: 36px 32px 80px;
+  width: 100%;
+  padding: 36px 80px 80px;
 }
 
 @media (max-width: 880px) {

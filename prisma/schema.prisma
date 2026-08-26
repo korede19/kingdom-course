@@ -16,12 +16,13 @@ model User {
   lastNudgedAt   DateTime?
   createdAt      DateTime  @default(now())
 
-  sessions     Session[]
-  progress     LessonProgress[]
-  cartItems    CartItem[]
-  orders       Order[]
-  donations    Donation[]
-  resetTokens  PasswordResetToken[]
+  sessions            Session[]
+  progress            LessonProgress[]
+  cartItems           CartItem[]
+  orders              Order[]
+  donations           Donation[]
+  resetTokens         PasswordResetToken[]
+  passportApplication PassportApplication?
 }
 
 model Session {
@@ -73,12 +74,16 @@ model CartItem {
 }
 
 model Order {
-  id         String      @id @default(cuid())
-  userId     String
-  user       User        @relation(fields: [userId], references: [id], onDelete: Cascade)
-  totalCents Int
-  createdAt  DateTime    @default(now())
-  items      OrderItem[]
+  id            String      @id @default(cuid())
+  userId        String
+  user          User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  totalCents    Int
+  paymentStatus String      @default("pending") // "pending" | "paid"
+  paidAt        DateTime?
+  createdAt     DateTime    @default(now())
+  items         OrderItem[]
+
+  @@index([userId])
 }
 
 model OrderItem {
@@ -89,6 +94,20 @@ model OrderItem {
   name          String
   unitPriceCents Int
   quantity      Int
+}
+
+model PassportApplication {
+  id            String    @id @default(cuid())
+  userId        String    @unique
+  user          User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  fullName      String
+  address       String
+  country       String
+  pictureUrl    String?   @db.Text
+  feeCents      Int       @default(5000)
+  paymentStatus String    @default("pending") // "pending" | "paid"
+  paidAt        DateTime?
+  createdAt     DateTime  @default(now())
 }
 
 model Donation {

@@ -3,32 +3,33 @@ export type Product = {
   name: string;
   description: string;
   priceCents: number;
+  /** Digital products are gated behind a paid order and served from /api/downloads/[id] instead of shipped. */
+  isDigital?: boolean;
+  subtitle?: string;
+  /** Path under /public used as the product's card image. */
+  coverImage?: string;
 };
 
 export const PRODUCTS: Product[] = [
   {
-    id: "workbook",
-    name: "Kingdom Culture Academy Workbook",
-    description: "The full companion workbook with notes space for all 10 lessons.",
-    priceCents: 1800,
+    id: "sfacl-ebook",
+    name: "Songs for a Changing Life",
+    subtitle: "eBook (PDF)",
+    description:
+      "A collection of songs and reflections to carry you through seasons of change, written to be sung, prayed, and lived.",
+    priceCents: 999,
+    isDigital: true,
+    coverImage: "/images/covers/sfacl-cover.jpg",
   },
   {
-    id: "journal",
-    name: "Ambassador's Journal",
-    description: "A guided journal for reflection questions and prayer.",
-    priceCents: 1400,
-  },
-  {
-    id: "bundle",
-    name: "Course Bundle (Print + Journal)",
-    description: "The printed workbook and journal together, at a bundled price.",
-    priceCents: 2800,
-  },
-  {
-    id: "wristband",
-    name: "Kingdom Culture Wristband",
-    description: "A simple daily reminder of your citizenship in the Kingdom.",
-    priceCents: 800,
+    id: "argument-resolution-ebook",
+    name: "Happily, Ever After: Argument Resolution",
+    subtitle: "eBook (PDF)",
+    description:
+      "A communication resource for every relationship. David Dixon teaches the Speaker/Listener technique, a step-by-step way to talk without fighting.",
+    priceCents: 2499,
+    isDigital: true,
+    coverImage: "/images/covers/argument-resolution-cover.jpg",
   },
 ];
 

@@ -11,14 +11,22 @@ import styles from "./Sidebar.module.css";
 type NavItem = {
   href: string;
   label: string;
-  icon: "grid" | "book" | "certificate" | "cart" | "heart";
+  icon: "grid" | "book" | "certificate" | "cart" | "heart" | "passport";
   isActive: (pathname: string) => boolean;
+  special?: boolean;
 };
 
 const NAV_ITEMS: NavItem[] = [
   { href: "/dashboard", label: "Dashboard", icon: "grid", isActive: (p) => p === "/dashboard" },
   { href: "/course", label: "Progress Map", icon: "book", isActive: (p) => p.startsWith("/course") },
   { href: "/certificate", label: "Certificate", icon: "certificate", isActive: (p) => p === "/certificate" },
+  {
+    href: "/passport",
+    label: "Kingdom Passport",
+    icon: "passport",
+    isActive: (p) => p === "/passport",
+    special: true,
+  },
   { href: "/shop", label: "Shop", icon: "cart", isActive: (p) => p === "/shop" },
   { href: "/give", label: "Give", icon: "heart", isActive: (p) => p === "/give" },
 ];
@@ -81,10 +89,17 @@ export function Sidebar({ userName, cartCount }: { userName: string; cartCount: 
         <nav className={styles.nav}>
           {NAV_ITEMS.map((item) => {
             const active = item.isActive(pathname);
+            const className = item.special
+              ? active
+                ? styles.navItemPassportActive
+                : styles.navItemPassport
+              : active
+                ? styles.navItemActive
+                : styles.navItem;
             return (
-              <Link key={item.href} href={item.href} className={active ? styles.navItemActive : styles.navItem}>
+              <Link key={item.href} href={item.href} className={className}>
                 <span className={styles.navIcon}>
-                  <Icon name={item.icon} size={18} />
+                  <Icon name={item.icon} size={18} color={item.special ? "#F2C99B" : undefined} />
                 </span>
                 {item.label}
                 {item.icon === "cart" && cartCount > 0 ? <span className={styles.cartBadge}>{cartCount}</span> : null}

@@ -18,7 +18,8 @@ type IconName =
   | "menu"
   | "close"
   | "eye"
-  | "eyeOff";
+  | "eyeOff"
+  | "passport";
 
 const PATHS: Record<IconName, React.ReactNode> = {
   shield: (
@@ -135,6 +136,14 @@ const PATHS: Record<IconName, React.ReactNode> = {
         strokeLinejoin="round"
       />
       <path d="M9.5 10a3 3 0 0 0 4.2 4.2" strokeWidth="1.7" strokeLinecap="round" />
+    </>
+  ),
+  passport: (
+    <>
+      <rect x="5" y="2.5" width="14" height="19" rx="1.6" strokeWidth="1.7" />
+      <circle cx="12" cy="9" r="2.6" strokeWidth="1.5" />
+      <path d="M12 6.6v.6M12 10.8v.6M9.6 9h.6M13.8 9h.6" strokeWidth="1.2" strokeLinecap="round" />
+      <path d="M8.5 15.5h7M9.5 18h5" strokeWidth="1.5" strokeLinecap="round" />
     </>
   ),
 };
