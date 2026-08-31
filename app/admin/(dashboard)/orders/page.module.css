@@ -109,6 +109,12 @@
   font-weight: 700;
 }
 
+.statusRefunded {
+  color: var(--color-error);
+  font-weight: 700;
+  white-space: nowrap;
+}
+
 .mutedCell {
   color: var(--color-text-muted);
   white-space: nowrap;

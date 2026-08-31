@@ -74,14 +74,15 @@ model CartItem {
 }
 
 model Order {
-  id            String      @id @default(cuid())
-  userId        String
-  user          User        @relation(fields: [userId], references: [id], onDelete: Cascade)
-  totalCents    Int
-  paymentStatus String      @default("pending") // "pending" | "paid"
-  paidAt        DateTime?
-  createdAt     DateTime    @default(now())
-  items         OrderItem[]
+  id              String      @id @default(cuid())
+  userId          String
+  user            User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  totalCents      Int
+  paymentStatus   String      @default("pending") // "pending" | "paid"
+  paidAt          DateTime?
+  stripeSessionId String?     @unique
+  createdAt       DateTime    @default(now())
+  items           OrderItem[]
 
   @@index([userId])
 }
@@ -97,28 +98,37 @@ model OrderItem {
 }
 
 model PassportApplication {
-  id            String    @id @default(cuid())
-  userId        String    @unique
-  user          User      @relation(fields: [userId], references: [id], onDelete: Cascade)
-  fullName      String
-  address       String
-  country       String
-  pictureUrl    String?   @db.Text
-  feeCents      Int       @default(5000)
-  paymentStatus String    @default("pending") // "pending" | "paid"
-  paidAt        DateTime?
-  createdAt     DateTime  @default(now())
+  id              String    @id @default(cuid())
+  userId          String    @unique
+  user            User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  fullName        String
+  address         String
+  country         String
+  pictureUrl      String?   @db.Text
+  feeCents        Int       @default(5000)
+  paymentStatus   String    @default("pending") // "pending" | "paid"
+  paidAt          DateTime?
+  stripeSessionId String?   @unique
+  createdAt       DateTime  @default(now())
 }
 
 model Donation {
-  id          String   @id @default(cuid())
-  userId      String?
-  user        User?    @relation(fields: [userId], references: [id], onDelete: SetNull)
-  name        String
-  email       String
-  amountCents Int
-  frequency   String
-  createdAt   DateTime @default(now())
+  id                   String    @id @default(cuid())
+  userId               String?
+  user                 User?     @relation(fields: [userId], references: [id], onDelete: SetNull)
+  name                 String
+  email                String
+  amountCents          Int
+  frequency            String
+  paymentStatus        String    @default("pending") // "pending" | "paid"
+  paidAt               DateTime?
+  stripeSessionId      String?   @unique
+  stripeInvoiceId      String?   @unique
+  stripeSubscriptionId String?
+  stripeCustomerId     String?
+  createdAt            DateTime  @default(now())
+
+  @@index([stripeSubscriptionId])
 }
 
 /// Fully separate from User — admins sign in with their own credentials,

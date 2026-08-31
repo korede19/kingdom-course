@@ -8,24 +8,10 @@ import styles from "./DonationForm.module.css";
 const PRESET_AMOUNTS = [10, 25, 50, 100];
 
 export function DonationForm() {
-  const [state, formAction, isPending] = useActionState<DonationState | null, FormData>(submitDonationAction, null);
+  const [state, formAction, isPending] = useActionState<DonationState, FormData>(submitDonationAction, null);
   const [frequency, setFrequency] = useState<"once" | "monthly">("once");
   const [amount, setAmount] = useState<number>(25);
   const [customAmount, setCustomAmount] = useState("");
-
-  if (state?.ok) {
-    return (
-      <div className={styles.confirmationPanel}>
-        <div className={styles.confirmationIcon}>
-          <Icon name="heart" size={42} color="#D2823C" />
-        </div>
-        <h2 className={styles.confirmationTitle}>Thank you for your generosity</h2>
-        <p className={styles.confirmationText}>
-          {`Your ${state.freqLabel} gift of ${state.amountLabel} helps carry the Kingdom's work forward. A receipt would normally be sent to ${state.email}.`}
-        </p>
-      </div>
-    );
-  }
 
   function selectPreset(value: number) {
     setAmount(value);
@@ -116,7 +102,7 @@ export function DonationForm() {
           required
         />
 
-        {state && !state.ok ? <div className={styles.error}>{state.error}</div> : null}
+        {state ? <div className={styles.error}>{state.error}</div> : null}
 
         <button type="submit" className={styles.submit} disabled={isPending}>
           {isPending ? "Processing…" : `Give $${amount % 1 === 0 ? amount : amount.toFixed(2)}${frequency === "monthly" ? "/mo" : ""}`}

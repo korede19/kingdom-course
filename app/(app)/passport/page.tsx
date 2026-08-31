@@ -3,15 +3,24 @@ import { requireUser } from "@/lib/session";
 import { prisma } from "@/lib/db";
 import { formatCents } from "@/lib/products";
 import { formatDate } from "@/lib/format";
-import { submitPassportApplicationAction } from "@/actions/passport";
+import { submitPassportApplicationAction, resumePassportPaymentAction } from "@/actions/passport";
+import { reconcileCheckoutSession } from "@/lib/stripeFulfillment";
 import { PassportApplyForm } from "./PassportApplyForm";
 import { Icon } from "@/components/Icon";
 import styles from "./page.module.css";
 
 export const metadata: Metadata = { title: "Kingdom Passport · Kingdom Culture Academy" };
 
-export default async function PassportPage() {
+type SearchParams = { error?: string; submitted?: string; session_id?: string };
+
+export default async function PassportPage({ searchParams }: { searchParams: Promise<SearchParams> }) {
+  const { error, submitted, session_id: sessionId } = await searchParams;
   const user = await requireUser();
+
+  if (submitted === "1") {
+    await reconcileCheckoutSession(sessionId);
+  }
+
   const application = await prisma.passportApplication.findUnique({ where: { userId: user.id } });
 
   if (application?.paymentStatus === "paid") {
@@ -110,11 +119,26 @@ export default async function PassportPage() {
           <div className={styles.pendingIcon}>
             <Icon name="clock" size={26} color="#A85F1E" />
           </div>
-          <h2 className={styles.pendingTitle}>Awaiting payment confirmation</h2>
-          <p className={styles.pendingText}>
-            Your application is on file. Your Kingdom Passport will be issued here as soon as your $50 payment is
-            confirmed.
-          </p>
+          {application.paymentStatus === "refunded" ? (
+            <>
+              <h2 className={styles.pendingTitle}>Payment refunded</h2>
+              <p className={styles.pendingText}>
+                Your $50 payment was refunded, so your Kingdom Passport hasn&rsquo;t been issued. If this wasn&rsquo;t
+                expected, or you&rsquo;d like to complete payment again, use the button below.
+              </p>
+            </>
+          ) : (
+            <>
+              <h2 className={styles.pendingTitle}>Awaiting payment confirmation</h2>
+              <p className={styles.pendingText}>
+                Your application is on file. Your Kingdom Passport will be issued here as soon as your $50 payment is
+                confirmed.
+              </p>
+            </>
+          )}
+          {error === "cancelled" ? (
+            <p className={styles.pendingNotice}>Checkout was cancelled. You can pick up where you left off below.</p>
+          ) : null}
           <div className={styles.pendingDetails}>
             <div className={styles.pendingRow}>
               <span>Name</span>
@@ -133,6 +157,11 @@ export default async function PassportPage() {
               <span>{formatDate(application.createdAt)}</span>
             </div>
           </div>
+          <form action={resumePassportPaymentAction}>
+            <button type="submit" className={styles.resumeButton}>
+              Complete Payment
+            </button>
+          </form>
         </div>
       </div>
     );

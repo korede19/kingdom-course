@@ -7,6 +7,7 @@ import { prisma } from "@/lib/db";
 import { requireUser } from "@/lib/session";
 import { getProduct } from "@/lib/products";
 import { computeOrderItems } from "@/lib/orders";
+import { getStripe, getAppUrl } from "@/lib/stripe";
 
 const productIdSchema = z.string().min(1);
 
@@ -36,6 +37,12 @@ export async function removeFromCartAction(productId: string): Promise<void> {
   revalidatePath("/shop");
 }
 
+/**
+ * The Order (and its OrderItems) is only ever created once Stripe confirms payment,
+ * inside the webhook handler — not here. Creating it up front, before the user has
+ * actually paid, would leave a permanent "Payment Pending" product on the shop page
+ * with no way to retry if they simply close or cancel the Stripe checkout page.
+ */
 export async function checkoutCartAction(): Promise<void> {
   const user = await requireUser();
   const cartItems = await prisma.cartItem.findMany({ where: { userId: user.id } });
@@ -44,19 +51,37 @@ export async function checkoutCartAction(): Promise<void> {
     redirect("/shop?error=empty-cart");
   }
 
-  const { items: orderItems, totalCents } = computeOrderItems(cartItems, getProduct);
+  const { items: orderItems } = computeOrderItems(cartItems, getProduct);
 
-  await prisma.$transaction([
-    prisma.order.create({
-      data: {
-        userId: user.id,
-        totalCents,
-        items: { create: orderItems },
+  if (orderItems.length === 0) {
+    redirect("/shop?error=empty-cart");
+  }
+
+  const appUrl = getAppUrl();
+  const session = await getStripe().checkout.sessions.create({
+    mode: "payment",
+    payment_method_types: ["card"],
+    customer_email: user.email,
+    line_items: orderItems.map((item) => ({
+      quantity: item.quantity,
+      price_data: {
+        currency: "usd",
+        unit_amount: item.unitPriceCents,
+        product_data: { name: item.name },
       },
-    }),
-    prisma.cartItem.deleteMany({ where: { userId: user.id } }),
-  ]);
+    })),
+    metadata: {
+      kind: "shop",
+      userId: user.id,
+      cart: JSON.stringify(cartItems.map((item) => ({ productId: item.productId, quantity: item.quantity }))),
+    },
+    success_url: `${appUrl}/shop?ordered=1&session_id={CHECKOUT_SESSION_ID}`,
+    cancel_url: `${appUrl}/shop?error=cancelled`,
+  });
 
-  revalidatePath("/shop");
-  redirect("/shop?ordered=1");
+  if (!session.url) {
+    throw new Error("Stripe did not return a checkout URL.");
+  }
+
+  redirect(session.url);
 }

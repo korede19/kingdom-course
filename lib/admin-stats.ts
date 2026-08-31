@@ -18,7 +18,7 @@ export async function getOverviewStats(): Promise<OverviewStats> {
     prisma.user.count({ where: { completionDate: { not: null } } }),
     prisma.lessonProgress.count({ where: { quizPassed: true } }),
     prisma.order.aggregate({ _count: true, _sum: { totalCents: true }, where: { paymentStatus: "paid" } }),
-    prisma.donation.aggregate({ _count: true, _sum: { amountCents: true } }),
+    prisma.donation.aggregate({ _count: true, _sum: { amountCents: true }, where: { paymentStatus: "paid" } }),
   ]);
 
   const avgCompletionPercent =

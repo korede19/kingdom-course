@@ -237,6 +237,16 @@
   margin: 0 0 26px;
 }
 
+.pendingNotice {
+  background: #f5eacb;
+  color: var(--color-gold-deep);
+  border-radius: 10px;
+  padding: 12px 14px;
+  font-size: 13.5px;
+  font-weight: 600;
+  margin: -14px 0 22px;
+}
+
 .pendingDetails {
   text-align: left;
   background: var(--color-bg-card);
@@ -265,6 +275,19 @@
 .pendingRow span:last-child {
   color: var(--color-green);
   font-weight: 700;
+}
+
+.resumeButton {
+  width: 100%;
+  margin-top: 20px;
+  padding: 14px;
+  border: none;
+  border-radius: 12px;
+  background: linear-gradient(135deg, var(--color-green-mid), var(--color-green-darkest));
+  color: var(--color-gold);
+  font-weight: 700;
+  font-size: 14.5px;
+  box-shadow: 0 10px 22px rgba(20, 33, 61, 0.24);
 }
 
 /* ---- Issued passport document ---- */

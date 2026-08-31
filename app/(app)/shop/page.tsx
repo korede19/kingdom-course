@@ -5,16 +5,22 @@ import { prisma } from "@/lib/db";
 import { PRODUCTS, getProduct, formatCents } from "@/lib/products";
 import { getUserPurchaseStatuses } from "@/lib/purchases";
 import { addToCartAction, removeFromCartAction, checkoutCartAction } from "@/actions/shop";
+import { reconcileCheckoutSession } from "@/lib/stripeFulfillment";
 import { Icon } from "@/components/Icon";
 import styles from "./page.module.css";
 
 export const metadata: Metadata = { title: "Shop · Kingdom Culture Academy" };
 
-type SearchParams = { ordered?: string; error?: string };
+type SearchParams = { ordered?: string; error?: string; session_id?: string };
 
 export default async function ShopPage({ searchParams }: { searchParams: Promise<SearchParams> }) {
-  const { ordered, error } = await searchParams;
+  const { ordered, error, session_id: sessionId } = await searchParams;
   const user = await requireUser();
+
+  if (ordered === "1") {
+    await reconcileCheckoutSession(sessionId);
+  }
+
   const [cartItems, purchaseStatuses] = await Promise.all([
     prisma.cartItem.findMany({ where: { userId: user.id } }),
     getUserPurchaseStatuses(user.id),
@@ -87,6 +93,9 @@ export default async function ShopPage({ searchParams }: { searchParams: Promise
       </div>
 
       {error === "empty-cart" ? <div className={styles.errorNotice}>Your cart is empty.</div> : null}
+      {error === "cancelled" ? (
+        <div className={styles.errorNotice}>Checkout was cancelled. Your cart is still here whenever you're ready.</div>
+      ) : null}
       {ordered === "1" && cartLines.length === 0 ? (
         <div className={styles.confirmation}>
           Thank you! Your order has been placed and is awaiting payment confirmation. Digital items will unlock for

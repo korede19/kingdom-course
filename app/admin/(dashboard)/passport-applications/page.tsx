@@ -87,6 +87,8 @@ export default async function AdminPassportApplicationsPage({
                     <span className={styles.statusPaid}>
                       Paid{application.paidAt ? ` · ${formatDate(application.paidAt)}` : ""}
                     </span>
+                  ) : application.paymentStatus === "refunded" ? (
+                    <span className={styles.statusRefunded}>Refunded</span>
                   ) : (
                     <span className={styles.statusPending}>Pending</span>
                   )}

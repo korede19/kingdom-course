@@ -5,6 +5,7 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 import { prisma } from "@/lib/db";
 import { requireUser } from "@/lib/session";
+import { getStripe, getAppUrl } from "@/lib/stripe";
 
 export type PassportApplyState = { error: string } | null;
 
@@ -18,6 +19,43 @@ const applySchema = z.object({
     .min(1, "Please upload a photo.")
     .refine((v) => v.startsWith("data:image/"), "Please upload a valid photo."),
 });
+
+async function startPassportCheckout(
+  applicationId: string,
+  feeCents: number,
+  userEmail: string,
+): Promise<string> {
+  const appUrl = getAppUrl();
+  const session = await getStripe().checkout.sessions.create({
+    mode: "payment",
+    payment_method_types: ["card"],
+    customer_email: userEmail,
+    line_items: [
+      {
+        quantity: 1,
+        price_data: {
+          currency: "usd",
+          unit_amount: feeCents,
+          product_data: { name: "Kingdom Passport Application Fee" },
+        },
+      },
+    ],
+    metadata: { kind: "passport", passportApplicationId: applicationId },
+    success_url: `${appUrl}/passport?submitted=1&session_id={CHECKOUT_SESSION_ID}`,
+    cancel_url: `${appUrl}/passport?error=cancelled`,
+  });
+
+  if (!session.url) {
+    throw new Error("Stripe did not return a checkout URL.");
+  }
+
+  await prisma.passportApplication.update({
+    where: { id: applicationId },
+    data: { stripeSessionId: session.id },
+  });
+
+  return session.url;
+}
 
 export async function submitPassportApplicationAction(
   _prevState: PassportApplyState,
@@ -41,7 +79,7 @@ export async function submitPassportApplicationAction(
     return { error: "You already have a passport application on file." };
   }
 
-  await prisma.passportApplication.create({
+  const application = await prisma.passportApplication.create({
     data: {
       userId: user.id,
       fullName: parsed.data.fullName,
@@ -52,5 +90,19 @@ export async function submitPassportApplicationAction(
   });
 
   revalidatePath("/passport");
-  redirect("/passport?submitted=1");
+  const checkoutUrl = await startPassportCheckout(application.id, application.feeCents, user.email);
+  redirect(checkoutUrl);
+}
+
+/** Lets an applicant retry payment after cancelling or abandoning the Stripe checkout page. */
+export async function resumePassportPaymentAction(): Promise<void> {
+  const user = await requireUser();
+
+  const application = await prisma.passportApplication.findUnique({ where: { userId: user.id } });
+  if (!application || application.paymentStatus === "paid") {
+    redirect("/passport");
+  }
+
+  const checkoutUrl = await startPassportCheckout(application.id, application.feeCents, user.email);
+  redirect(checkoutUrl);
 }

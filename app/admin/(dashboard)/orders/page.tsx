@@ -77,6 +77,8 @@ export default async function AdminOrdersPage({ searchParams }: { searchParams: 
                 <td>
                   {order.paymentStatus === "paid" ? (
                     <span className={styles.statusPaid}>Paid{order.paidAt ? ` · ${formatDate(order.paidAt)}` : ""}</span>
+                  ) : order.paymentStatus === "refunded" ? (
+                    <span className={styles.statusRefunded}>Refunded</span>
                   ) : (
                     <span className={styles.statusPending}>Pending</span>
                   )}
