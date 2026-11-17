@@ -6,6 +6,7 @@ import { formatDate } from "@/lib/format";
 import { submitPassportApplicationAction, resumePassportPaymentAction } from "@/actions/passport";
 import { reconcileCheckoutSession } from "@/lib/stripeFulfillment";
 import { PassportApplyForm } from "./PassportApplyForm";
+import { LogoMark } from "@/components/Logo";
 import { Icon } from "@/components/Icon";
 import styles from "./page.module.css";
 
@@ -45,7 +46,7 @@ export default async function PassportPage({ searchParams }: { searchParams: Pro
             <div className={styles.documentInner}>
               <div className={styles.documentHeader}>
                 <div className={styles.crest}>
-                  <Icon name="shield" size={22} color="var(--color-orange)" />
+                  <LogoMark size={36} color="var(--color-orange)" />
                 </div>
                 <div>
                   <div className={styles.documentBrand}>Kingdom of Heaven</div>

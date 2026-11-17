@@ -5,6 +5,7 @@ import { prisma } from "@/lib/db";
 import { toProgressMap, completedCount, badgeCount, isCourseComplete } from "@/lib/progress";
 import { LESSON_COUNT } from "@/lib/constants";
 import { formatDate } from "@/lib/format";
+import { LogoMark } from "@/components/Logo";
 import { Icon } from "@/components/Icon";
 import { PrintButton } from "@/components/PrintButton";
 import styles from "./page.module.css";
@@ -75,7 +76,7 @@ export default async function CertificatePage() {
 
             <div className={styles.content}>
               <div className={styles.crest}>
-                <Icon name="shield" size={26} color="var(--color-orange)" />
+                <LogoMark size={40} color="var(--color-orange)" />
               </div>
               <div className={styles.brand}>Kingdom Culture Academy</div>
 

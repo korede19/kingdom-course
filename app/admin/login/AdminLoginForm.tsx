@@ -2,6 +2,7 @@
 
 import { useActionState, useState } from "react";
 import { adminLoginAction, type AdminAuthState } from "@/actions/admin-auth";
+import { LogoMark } from "@/components/Logo";
 import { Icon } from "@/components/Icon";
 import styles from "./AdminLoginForm.module.css";
 
@@ -12,7 +13,7 @@ export function AdminLoginForm() {
   return (
     <div className={styles.card}>
       <div className={styles.badge}>
-        <Icon name="shield" size={22} color="#F2C99B" />
+        <LogoMark size={44} color="var(--color-green)" />
       </div>
       <h1 className={styles.heading}>Admin Access</h1>
       <p className={styles.subheading}>Sign in with your administrator credentials.</p>

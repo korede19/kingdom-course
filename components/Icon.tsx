@@ -1,5 +1,4 @@
 type IconName =
-  | "shield"
   | "mail"
   | "lock"
   | "user"
@@ -22,13 +21,6 @@ type IconName =
   | "passport";
 
 const PATHS: Record<IconName, React.ReactNode> = {
-  shield: (
-    <path
-      d="M12 2L3 6V11C3 16.5 6.8 21.2 12 22.5C17.2 21.2 21 16.5 21 11V6L12 2Z"
-      strokeWidth="1.6"
-      strokeLinejoin="round"
-    />
-  ),
   mail: (
     <>
       <rect x="3" y="5" width="18" height="14" rx="2" strokeWidth="1.7" />

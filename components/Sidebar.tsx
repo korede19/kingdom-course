@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { logoutAction } from "@/actions/auth";
+import { LogoMark } from "@/components/Logo";
 import { Icon } from "@/components/Icon";
 import { initials } from "@/lib/format";
 import styles from "./Sidebar.module.css";
@@ -50,9 +51,7 @@ export function Sidebar({ userName, cartCount }: { userName: string; cartCount: 
     <>
       <div className={styles.topbar}>
         <Link href="/dashboard" className={styles.topbarBrand}>
-          <div className={styles.brandBadge}>
-            <Icon name="shield" size={16} color="#D2823C" />
-          </div>
+          <LogoMark size={30} color="var(--color-gold)" />
           <span className={styles.topbarBrandName}>Kingdom Culture Academy</span>
         </Link>
         <button
@@ -71,9 +70,7 @@ export function Sidebar({ userName, cartCount }: { userName: string; cartCount: 
       <aside className={open ? `${styles.sidebar} ${styles.sidebarOpen}` : styles.sidebar}>
         <div className={styles.sidebarHeader}>
           <Link href="/dashboard" className={styles.brand}>
-            <div className={styles.brandBadge}>
-              <Icon name="shield" size={18} color="#D2823C" />
-            </div>
+            <LogoMark size={34} color="var(--color-gold)" />
             <span className={styles.brandName}>Kingdom Culture Academy</span>
           </Link>
           <button

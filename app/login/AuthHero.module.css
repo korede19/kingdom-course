@@ -34,19 +34,6 @@
   margin-bottom: 26px;
 }
 
-.brandBadge {
-  width: 52px;
-  height: 52px;
-  border-radius: 50%;
-  border: 2px solid var(--color-gold);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: rgba(10, 15, 30, 0.4);
-  backdrop-filter: blur(2px);
-  flex-shrink: 0;
-}
-
 .brandName {
   font-family: var(--font-serif);
   font-size: 14px;

@@ -8,8 +8,14 @@ import styles from "./AuthCard.module.css";
 
 type Mode = "login" | "register";
 
-export function AuthCard({ resetSuccess = false }: { resetSuccess?: boolean }) {
-  const [mode, setMode] = useState<Mode>("login");
+export function AuthCard({
+  resetSuccess = false,
+  initialMode = "login",
+}: {
+  resetSuccess?: boolean;
+  initialMode?: Mode;
+}) {
+  const [mode, setMode] = useState<Mode>(initialMode);
   const [loginState, loginFormAction, loginPending] = useActionState<AuthState, FormData>(loginAction, null);
   const [registerState, registerFormAction, registerPending] = useActionState<AuthState, FormData>(
     registerAction,

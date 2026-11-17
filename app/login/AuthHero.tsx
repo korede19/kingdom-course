@@ -1,5 +1,6 @@
 import Image from "next/image";
 import heroPhoto from "@/public/images/hero.jpg";
+import { LogoMark } from "@/components/Logo";
 import styles from "./AuthHero.module.css";
 
 export function AuthHero() {
@@ -9,16 +10,7 @@ export function AuthHero() {
       <div className={styles.scrim} />
       <div className={styles.content}>
         <div className={styles.brandRow}>
-          <div className={styles.brandBadge}>
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-              <path
-                d="M12 2L3 6V11C3 16.5 6.8 21.2 12 22.5C17.2 21.2 21 16.5 21 11V6L12 2Z"
-                stroke="#F2C99B"
-                strokeWidth="1.6"
-                strokeLinejoin="round"
-              />
-            </svg>
-          </div>
+          <LogoMark size={46} color="var(--color-gold)" />
           <span className={styles.brandName}>Kingdom Culture Academy</span>
         </div>
         <h1 className={styles.title}>A Journey into the Culture of Heaven on Earth</h1>

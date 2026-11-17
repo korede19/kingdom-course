@@ -12,18 +12,18 @@ export const metadata: Metadata = {
 export default async function LoginPage({
   searchParams,
 }: {
-  searchParams: Promise<{ reset?: string }>;
+  searchParams: Promise<{ reset?: string; mode?: string }>;
 }) {
   const user = await getSessionUser();
   if (user) redirect("/dashboard");
 
-  const { reset } = await searchParams;
+  const { reset, mode } = await searchParams;
 
   return (
     <div className={styles.page}>
       <AuthHero />
       <div className={styles.formSide}>
-        <AuthCard resetSuccess={reset === "success"} />
+        <AuthCard resetSuccess={reset === "success"} initialMode={mode === "register" ? "register" : "login"} />
       </div>
     </div>
   );

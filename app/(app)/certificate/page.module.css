@@ -173,14 +173,10 @@
 .crest {
   width: clamp(40px, 6vw, 56px);
   height: clamp(40px, 6vw, 56px);
-  border-radius: 50%;
-  border: 2px solid var(--color-orange);
-  background: var(--color-bg-card-alt);
   display: flex;
   align-items: center;
   justify-content: center;
   margin: 0 auto clamp(8px, 1.4vw, 14px);
-  box-shadow: 0 0 0 4px var(--color-bg-card), 0 0 0 5px var(--color-border-strong);
 }
 
 .brand {

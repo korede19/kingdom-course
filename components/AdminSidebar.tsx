@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { adminLogoutAction } from "@/actions/admin-auth";
+import { LogoMark } from "@/components/Logo";
 import { Icon } from "@/components/Icon";
 import { initials } from "@/lib/format";
 import styles from "./AdminSidebar.module.css";
@@ -27,9 +28,7 @@ export function AdminSidebar({ adminName }: { adminName: string }) {
     <>
       <div className={styles.topbar}>
         <Link href="/admin" className={styles.topbarBrand}>
-          <div className={styles.brandBadge}>
-            <Icon name="shield" size={16} color="#D2823C" />
-          </div>
+          <LogoMark size={30} color="var(--color-gold)" />
           <span className={styles.topbarBrandName}>Admin Console</span>
         </Link>
         <button
@@ -48,9 +47,7 @@ export function AdminSidebar({ adminName }: { adminName: string }) {
       <aside className={open ? `${styles.sidebar} ${styles.sidebarOpen}` : styles.sidebar}>
         <div className={styles.sidebarHeader}>
           <Link href="/admin" className={styles.brand}>
-            <div className={styles.brandBadge}>
-              <Icon name="shield" size={18} color="#D2823C" />
-            </div>
+            <LogoMark size={34} color="var(--color-gold)" />
             <span className={styles.brandName}>Admin Console</span>
           </Link>
           <button

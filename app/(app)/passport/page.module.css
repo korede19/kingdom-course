@@ -374,14 +374,10 @@
 .crest {
   width: 46px;
   height: 46px;
-  border-radius: 50%;
-  border: 2px solid var(--color-orange);
-  background: var(--color-bg-card-alt);
   display: flex;
   align-items: center;
   justify-content: center;
   flex-shrink: 0;
-  box-shadow: 0 0 0 4px var(--color-bg-card), 0 0 0 5px var(--color-border-strong);
 }
 
 .documentBrand {
